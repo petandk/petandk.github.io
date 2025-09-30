@@ -3,16 +3,12 @@ const lang = {
   es: {
     greeting: "¡Hola!",
     projects: "Proyectos",
-    contact: "Contacto",
+
     about: "Acerca de mí",
     loading: "Cargando...",
     navTitle: "Portafolio",
     pageTitle: "Portafolio",
 
-    formName: "Nombre",
-    formEmail: "Correo electrónico",
-    formMessage: "Mensaje",
-    formSubmit: "Enviar mensaje",
     footerText: "© 2025 Portafolio. Hecho con ❤️ usando la API de GitHub.",
     email: "Correo",
     website: "Sitio web",
@@ -22,21 +18,16 @@ const lang = {
     noProjects: "No se encontraron proyectos públicos.",
     noEmail: "No hay correo público disponible.",
     errorLoading: "Error al cargar los datos de GitHub.",
-    contactMe: "Contáctame",
   },
   en: {
     greeting: "Hello!",
     projects: "Projects",
-    contact: "Contact",
+
     about: "About Me",
     loading: "Loading...",
     navTitle: "Portfolio",
     pageTitle: "Portfolio",
 
-    formName: "Name",
-    formEmail: "Email",
-    formMessage: "Message",
-    formSubmit: "Send Message",
     footerText: "© 2025 Portfolio. Built with ❤️ using GitHub API.",
     email: "Email",
     website: "Website",
@@ -46,7 +37,6 @@ const lang = {
     noProjects: "No public projects found.",
     noEmail: "No public email available.",
     errorLoading: "Error loading GitHub data.",
-    contactMe: "Contact me",
   },
 };
 
@@ -74,13 +64,7 @@ const elements = {
   aboutText: document.getElementById("about-text"),
   projectsTitle: document.getElementById("projects-title"),
   projectsGrid: document.getElementById("projects-grid"),
-  contactTitle: document.getElementById("contact-title"),
-  contactInfo: document.getElementById("contact-info"),
-  contactForm: document.getElementById("contact-form"),
-  formNameLabel: document.getElementById("form-name-label"),
-  formEmailLabel: document.getElementById("form-email-label"),
-  formMessageLabel: document.getElementById("form-message-label"),
-  formSubmit: document.getElementById("form-submit"),
+
   footerText: document.getElementById("footer-text"),
 };
 
@@ -148,18 +132,13 @@ async function updateTranslations() {
   const aboutText = await fetchAboutText(currentLang);
   elements.aboutText.innerHTML = `<p>${aboutText}</p>`;
   elements.projectsTitle.textContent = translations.projects;
-  elements.contactTitle.textContent = translations.contact;
-  elements.formNameLabel.textContent = translations.formName;
-  elements.formEmailLabel.textContent = translations.formEmail;
-  elements.formMessageLabel.textContent = translations.formMessage;
-  elements.formSubmit.textContent = translations.formSubmit;
+
   elements.footerText.innerHTML = translations.footerText;
   elements.loadingText.textContent = translations.loading;
 
   // Update dynamic content if data is loaded
   if (userData) {
     await updateUserInfo();
-    updateContactInfo();
   }
 
   if (reposData) {
@@ -178,12 +157,6 @@ function setupEventListeners() {
     "click",
     async () => await setLanguage("en")
   );
-
-  // Contact form (placeholder functionality)
-  elements.contactForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    alert(lang[currentLang].contactMe + "!");
-  });
 
   // Smooth scrolling for internal links
   document.addEventListener("click", function (e) {
@@ -234,7 +207,6 @@ async function loadGitHubData() {
     // Update UI with fetched data
     await updateUserInfo();
     updateProjects();
-    updateContactInfo();
     updateMetaTags();
 
     // Hide loading spinner
@@ -401,14 +373,6 @@ function updateProjects() {
 
     elements.projectsGrid.appendChild(projectCard);
   });
-}
-
-function updateContactInfo() {
-  const translations = lang[currentLang];
-  elements.contactInfo.innerHTML = "";
-
-  // Always show the contact form - it will use the email from info file
-  // No need to hide the form or show GitHub contact info since it's redundant
 }
 
 function updateMetaTags() {
