@@ -195,10 +195,10 @@ function setupEventListeners() {
 // GitHub API Integration
 async function loadGitHubData() {
   try {
-    const username = extractUsernameFromDomain();
+    const username = await fetchUsernameFromFile();
 
     if (!username) {
-      throw new Error("Unable to extract username from domain");
+      throw new Error("Unable to get username");
     }
 
     // Fetch user data and repositories
@@ -237,26 +237,31 @@ async function loadGitHubData() {
   }
 }
 
+async function fetchUsernameFromFile() {
+  try {
+    const response = await fetch("username");
+    if (response.ok) {
+      const username = await response.text();
+      return username.trim(); // Remove any whitespace/newlines
+    }
+  } catch (error) {
+    console.warn("Could not read username:", error);
+  }
+
+  // Fallback: try to extract from domain
+  return extractUsernameFromDomain();
+}
+
 function extractUsernameFromDomain() {
   const hostname = window.location.hostname;
-
-  // For local development
-  if (hostname === "localhost" || hostname === "127.0.0.1") {
-    return "octocat"; // Default GitHub user for testing
-  }
 
   // For GitHub Pages (username.github.io)
   if (hostname.endsWith(".github.io")) {
     return hostname.split(".")[0];
   }
 
-  // For custom domains, try to extract from path or use a fallback
-  const pathParts = window.location.pathname.split("/").filter((part) => part);
-  if (pathParts.length > 0) {
-    return pathParts[0];
-  }
-
-  return null;
+  // For local development or unknown domains
+  return "octocat"; // Default fallback
 }
 
 function updateUserInfo() {
