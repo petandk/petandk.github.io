@@ -51,7 +51,7 @@ const lang = {
 };
 
 // Global variables
-let currentLang = "en";
+let currentLang = "es";
 let userData = null;
 let reposData = null;
 let userInfo = null;
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 // Theme Management
 function initializeTheme() {
-  const savedTheme = localStorage.getItem("theme") || "light";
+  const savedTheme = localStorage.getItem("theme") || "dark";
   document.documentElement.setAttribute("data-theme", savedTheme);
   updateThemeToggle(savedTheme);
 }
@@ -116,7 +116,7 @@ function updateThemeToggle(theme) {
 
 // Language Management
 async function initializeLanguage() {
-  const savedLang = localStorage.getItem("language") || "en";
+  const savedLang = localStorage.getItem("language") || "es";
   await setLanguage(savedLang);
 }
 
