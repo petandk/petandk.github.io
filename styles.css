@@ -150,6 +150,14 @@ body {
   color: white;
 }
 
+.lang-btn .fi {
+  font-size: 1.2rem;
+  width: 1.5rem;
+  height: 1.1rem;
+  border-radius: 2px;
+  display: inline-block;
+}
+
 /* Main Content */
 .main {
   padding-top: 80px;
@@ -162,10 +170,11 @@ body {
 }
 
 .hero-content {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 3rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
+  gap: 2rem;
 }
 
 .hero-avatar {
@@ -189,6 +198,10 @@ body {
 
 .hero-text {
   animation: fadeInUp 1s ease-out 0.2s both;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero-title {
@@ -216,6 +229,7 @@ body {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .hero-link {
@@ -238,6 +252,12 @@ body {
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px var(--shadow);
+}
+
+.hero-link i {
+  font-size: 1.1em;
+  width: 1.2em;
+  text-align: center;
 }
 
 /* Section Styles */
@@ -355,10 +375,9 @@ section {
 }
 
 .contact-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -390,6 +409,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  width: 100%;
 }
 
 .form-group {
@@ -487,9 +507,7 @@ section {
   }
   
   .hero-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    text-align: center;
+    gap: 1.5rem;
   }
   
   .avatar {
@@ -515,8 +533,8 @@ section {
   }
   
   .contact-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    max-width: 100%;
+    padding: 0 1rem;
   }
   
   .hero-links {

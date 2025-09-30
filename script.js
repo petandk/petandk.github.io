@@ -8,8 +8,7 @@ const lang = {
     loading: "Cargando...",
     navTitle: "Portafolio",
     pageTitle: "Portafolio",
-    aboutText:
-      "Soy un desarrollador apasionado que ama crear experiencias digitales increíbles.",
+
     formName: "Nombre",
     formEmail: "Correo electrónico",
     formMessage: "Mensaje",
@@ -33,8 +32,7 @@ const lang = {
     loading: "Loading...",
     navTitle: "Portfolio",
     pageTitle: "Portfolio",
-    aboutText:
-      "I'm a passionate developer who loves creating amazing digital experiences.",
+
     formName: "Name",
     formEmail: "Email",
     formMessage: "Message",
@@ -56,6 +54,7 @@ const lang = {
 let currentLang = "en";
 let userData = null;
 let reposData = null;
+let userInfo = null;
 
 // DOM Elements
 const elements = {
@@ -86,9 +85,9 @@ const elements = {
 };
 
 // Initialize the application
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
   initializeTheme();
-  initializeLanguage();
+  await initializeLanguage();
   setupEventListeners();
   loadGitHubData();
 });
@@ -116,12 +115,12 @@ function updateThemeToggle(theme) {
 }
 
 // Language Management
-function initializeLanguage() {
+async function initializeLanguage() {
   const savedLang = localStorage.getItem("language") || "en";
-  setLanguage(savedLang);
+  await setLanguage(savedLang);
 }
 
-function setLanguage(language) {
+async function setLanguage(language) {
   currentLang = language;
   localStorage.setItem("language", language);
 
@@ -133,10 +132,10 @@ function setLanguage(language) {
   document.documentElement.lang = language;
 
   // Update all translatable content
-  updateTranslations();
+  await updateTranslations();
 }
 
-function updateTranslations() {
+async function updateTranslations() {
   const translations = lang[currentLang];
 
   // Update static content
@@ -144,7 +143,10 @@ function updateTranslations() {
   elements.navTitle.textContent = translations.navTitle;
   elements.heroGreeting.textContent = translations.greeting;
   elements.aboutTitle.textContent = translations.about;
-  elements.aboutText.textContent = translations.aboutText;
+
+  // Update about text from file
+  const aboutText = await fetchAboutText(currentLang);
+  elements.aboutText.innerHTML = `<p>${aboutText}</p>`;
   elements.projectsTitle.textContent = translations.projects;
   elements.contactTitle.textContent = translations.contact;
   elements.formNameLabel.textContent = translations.formName;
@@ -156,7 +158,7 @@ function updateTranslations() {
 
   // Update dynamic content if data is loaded
   if (userData) {
-    updateUserInfo();
+    await updateUserInfo();
     updateContactInfo();
   }
 
@@ -168,8 +170,14 @@ function updateTranslations() {
 // Event Listeners
 function setupEventListeners() {
   elements.themeToggle.addEventListener("click", toggleTheme);
-  elements.langEs.addEventListener("click", () => setLanguage("es"));
-  elements.langEn.addEventListener("click", () => setLanguage("en"));
+  elements.langEs.addEventListener(
+    "click",
+    async () => await setLanguage("es")
+  );
+  elements.langEn.addEventListener(
+    "click",
+    async () => await setLanguage("en")
+  );
 
   // Contact form (placeholder functionality)
   elements.contactForm.addEventListener("submit", function (e) {
@@ -195,10 +203,11 @@ function setupEventListeners() {
 // GitHub API Integration
 async function loadGitHubData() {
   try {
-    const username = extractUsernameFromDomain();
+    userInfo = await fetchInfoFromFile();
+    const username = userInfo.username;
 
     if (!username) {
-      throw new Error("Unable to extract username from domain");
+      throw new Error("Unable to get username");
     }
 
     // Fetch user data and repositories
@@ -223,7 +232,7 @@ async function loadGitHubData() {
       .slice(0, 6); // Show top 6 repositories
 
     // Update UI with fetched data
-    updateUserInfo();
+    await updateUserInfo();
     updateProjects();
     updateContactInfo();
     updateMetaTags();
@@ -237,43 +246,91 @@ async function loadGitHubData() {
   }
 }
 
+async function fetchInfoFromFile() {
+  try {
+    const response = await fetch("info");
+    if (response.ok) {
+      const content = await response.text();
+      const lines = content.trim().split("\n");
+      return {
+        username: lines[0]?.trim() || null,
+        email: lines[1]?.trim() || null,
+      };
+    }
+  } catch (error) {
+    console.warn("Could not read info file:", error);
+  }
+
+  // Fallback: try to extract username from domain
+  return {
+    username: extractUsernameFromDomain(),
+    email: null,
+  };
+}
+
+async function fetchAboutText(language) {
+  try {
+    const fileName = language === "es" ? "sobreMi" : "aboutMe";
+    const response = await fetch(fileName);
+    if (response.ok) {
+      const text = await response.text();
+      // Convert double line breaks to paragraph breaks, single line breaks to <br>
+      return text
+        .trim()
+        .split("\n\n")
+        .map((paragraph) => paragraph.replace(/\n/g, "<br>"))
+        .join("</p><p>");
+    }
+  } catch (error) {
+    console.warn(`Could not read ${language} about file:`, error);
+  }
+
+  // Fallback to hardcoded text
+  return language === "es"
+    ? "Tu texto personalizado en español aquí."
+    : "Your custom text in English here.";
+}
+
 function extractUsernameFromDomain() {
   const hostname = window.location.hostname;
-
-  // For local development
-  if (hostname === "localhost" || hostname === "127.0.0.1") {
-    return "octocat"; // Default GitHub user for testing
-  }
 
   // For GitHub Pages (username.github.io)
   if (hostname.endsWith(".github.io")) {
     return hostname.split(".")[0];
   }
 
-  // For custom domains, try to extract from path or use a fallback
-  const pathParts = window.location.pathname.split("/").filter((part) => part);
-  if (pathParts.length > 0) {
-    return pathParts[0];
-  }
-
-  return null;
+  // For local development or unknown domains
+  return "octocat"; // Default fallback
 }
 
-function updateUserInfo() {
+async function updateUserInfo() {
   const translations = lang[currentLang];
 
   // Update basic info
   elements.userName.textContent = userData.name || userData.login;
-  elements.userBio.textContent = userData.bio || translations.aboutText;
+
+  // Use GitHub bio if available, otherwise use about text from file
+  if (userData.bio) {
+    // For GitHub bio, preserve line breaks with <br> tags
+    elements.userBio.innerHTML = userData.bio.replace(/\n/g, "<br>");
+  } else {
+    const aboutText = await fetchAboutText(currentLang);
+    elements.userBio.innerHTML = `<p>${aboutText}</p>`;
+  }
   elements.userAvatar.src = userData.avatar_url;
   elements.userAvatar.alt = `${userData.name || userData.login} avatar`;
 
   // Update hero links
   elements.heroLinks.innerHTML = "";
 
-  // Email link
-  if (userData.email) {
-    addHeroLink("📧", translations.email, `mailto:${userData.email}`);
+  // Email link - use custom email from info file, or fallback to GitHub email
+  const emailToUse = userInfo?.email || userData.email;
+  if (emailToUse) {
+    addHeroLink(
+      '<i class="fas fa-envelope"></i>',
+      translations.email,
+      `mailto:${emailToUse}`
+    );
   }
 
   // Website/blog link
@@ -281,20 +338,20 @@ function updateUserInfo() {
     const url = userData.blog.startsWith("http")
       ? userData.blog
       : `https://${userData.blog}`;
-    addHeroLink("🌐", translations.website, url);
+    addHeroLink('<i class="fas fa-globe"></i>', translations.website, url);
   }
 
   // Twitter link
   if (userData.twitter_username) {
     addHeroLink(
-      "🐦",
+      '<i class="fab fa-twitter"></i>',
       translations.twitter,
       `https://twitter.com/${userData.twitter_username}`
     );
   }
 
   // GitHub link
-  addHeroLink("💻", "GitHub", userData.html_url);
+  addHeroLink('<i class="fab fa-github"></i>', "GitHub", userData.html_url);
 }
 
 function addHeroLink(icon, text, url) {
@@ -350,31 +407,8 @@ function updateContactInfo() {
   const translations = lang[currentLang];
   elements.contactInfo.innerHTML = "";
 
-  // Only show contact form if no email is available
-  if (!userData.email) {
-    const noEmail = document.createElement("div");
-    noEmail.className = "contact-item";
-    noEmail.innerHTML = `
-      <div class="contact-item-icon">📧</div>
-      <div class="contact-item-text">${translations.noEmail}</div>
-    `;
-    elements.contactInfo.appendChild(noEmail);
-  } else {
-    elements.contactForm.style.display = "none";
-  }
-
-  // Add GitHub link
-  const githubContact = document.createElement("div");
-  githubContact.className = "contact-item";
-  githubContact.innerHTML = `
-    <div class="contact-item-icon">💻</div>
-    <div class="contact-item-text">
-      <a href="${userData.html_url}" target="_blank" rel="noopener noreferrer">
-        GitHub: ${userData.login}
-      </a>
-    </div>
-  `;
-  elements.contactInfo.appendChild(githubContact);
+  // Always show the contact form - it will use the email from info file
+  // No need to hide the form or show GitHub contact info since it's redundant
 }
 
 function updateMetaTags() {
