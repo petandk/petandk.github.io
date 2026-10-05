@@ -185,26 +185,21 @@ async function loadGitHubData() {
       throw new Error("Unable to get username");
     }
 
-    // Fetch user data and repositories
-    const [userResponse, reposResponse] = await Promise.all([
-      fetch(`https://api.github.com/users/${username}`),
-      fetch(
-        `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`
-      ),
-    ]);
+    const cached = readGitHubCache(username);
 
-    if (!userResponse.ok || !reposResponse.ok) {
-      throw new Error("Failed to fetch GitHub data");
+    if (cached && Date.now() - cached.time < CACHE_TTL) {
+      ({ userData, reposData } = cached);
+    } else {
+      try {
+        ({ userData, reposData } = await fetchGitHubData(username));
+        writeGitHubCache(username, userData, reposData);
+      } catch (error) {
+        // Fall back to expired cached data (e.g. when rate limited)
+        if (!cached) throw error;
+        console.warn("Using cached GitHub data:", error);
+        ({ userData, reposData } = cached);
+      }
     }
-
-    userData = await userResponse.json();
-    const allRepos = await reposResponse.json();
-
-    // Filter and sort repositories by stars
-    reposData = allRepos
-      .filter((repo) => !repo.private && !repo.fork)
-      .sort((a, b) => b.stargazers_count - a.stargazers_count)
-      .slice(0, 6); // Show top 6 repositories
 
     // Update UI with fetched data
     await updateUserInfo();
@@ -216,6 +211,52 @@ async function loadGitHubData() {
   } catch (error) {
     console.error("Error loading GitHub data:", error);
     showError();
+  }
+}
+
+// Cache GitHub responses to stay under the API rate limit (60 requests/hour per IP)
+const CACHE_TTL = 60 * 60 * 1000; // 1 hour
+
+async function fetchGitHubData(username) {
+  const [userResponse, reposResponse] = await Promise.all([
+    fetch(`https://api.github.com/users/${username}`),
+    fetch(
+      `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`
+    ),
+  ]);
+
+  if (!userResponse.ok || !reposResponse.ok) {
+    throw new Error("Failed to fetch GitHub data");
+  }
+
+  const user = await userResponse.json();
+  const allRepos = await reposResponse.json();
+
+  // Filter and sort repositories by stars
+  const repos = allRepos
+    .filter((repo) => !repo.private && !repo.fork)
+    .sort((a, b) => b.stargazers_count - a.stargazers_count)
+    .slice(0, 6); // Show top 6 repositories
+
+  return { userData: user, reposData: repos };
+}
+
+function readGitHubCache(username) {
+  try {
+    return JSON.parse(localStorage.getItem(`github-cache-${username}`));
+  } catch {
+    return null;
+  }
+}
+
+function writeGitHubCache(username, user, repos) {
+  try {
+    localStorage.setItem(
+      `github-cache-${username}`,
+      JSON.stringify({ time: Date.now(), userData: user, reposData: repos })
+    );
+  } catch {
+    // Storage full or unavailable; just skip caching
   }
 }
 
