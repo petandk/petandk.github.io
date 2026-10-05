@@ -16,7 +16,7 @@ Visita: [rmanzanas.com](https://rmanzanas.com) o [petandk.github.io](https://pet
   - Bio del perfil
   - Enlaces sociales (email, website, LinkedIn)
   - Repositorios públicos con estrellas
-- ⚡ **Rendimiento optimizado** - Carga rápida y eficiente
+- ⚡ **Rendimiento optimizado** - Los datos de GitHub se guardan en caché local durante 1 hora
 - 🎯 **SEO optimizado** - Meta tags para redes sociales (Open Graph)
 
 ## 📁 Estructura del Proyecto
@@ -176,6 +176,17 @@ Edita `index.html` en la sección `<head>`:
 3. En **Source**, selecciona la rama `main` y carpeta `/ (root)`
 4. Guarda los cambios
 5. Tu sitio estará disponible en `https://tu-usuario.github.io`
+
+## ⏱️ Límite de la API de GitHub
+
+La API de GitHub sin autenticación permite **60 peticiones por hora por IP**, y cada carga de la página usa 2. Para no agotarlo, los datos del perfil y los repositorios se guardan en `localStorage` durante **1 hora**:
+
+- Durante esa hora, recargar la página (incluso con Ctrl+F5) no hace peticiones a GitHub.
+- Los cambios en GitHub (bio, repositorios nuevos) pueden tardar hasta 1 hora en aparecer.
+- Si GitHub rechaza la petición, se muestran los últimos datos guardados.
+- Para forzar datos nuevos, borra la clave `github-cache-<usuario>` en DevTools → Application → Local Storage.
+
+Si aparece "Error al cargar los datos de GitHub", probablemente tu IP ha agotado el límite (puedes comprobarlo en `https://api.github.com/rate_limit`). Se restablece en menos de una hora.
 
 ## ⚠️ Nota Importante sobre Privacidad
 
