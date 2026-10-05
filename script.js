@@ -9,13 +9,14 @@ const lang = {
     navTitle: "Portafolio",
     pageTitle: "Portafolio",
 
-    footerText: "© 2025 Portafolio. Hecho con ❤️ usando la API de GitHub.",
+    footerText: `© ${new Date().getFullYear()} Portafolio. Hecho con ❤️ usando la API de GitHub.`,
     email: "Correo",
     website: "Sitio web",
-    twitter: "Twitter",
+    linkedin: "LinkedIn",
     viewProject: "Ver proyecto",
     stars: "estrellas",
     noProjects: "No se encontraron proyectos públicos.",
+    noDescription: "Sin descripción.",
     noEmail: "No hay correo público disponible.",
     errorLoading: "Error al cargar los datos de GitHub.",
   },
@@ -28,13 +29,14 @@ const lang = {
     navTitle: "Portfolio",
     pageTitle: "Portfolio",
 
-    footerText: "© 2025 Portfolio. Built with ❤️ using GitHub API.",
+    footerText: `© ${new Date().getFullYear()} Portfolio. Built with ❤️ using GitHub API.`,
     email: "Email",
     website: "Website",
-    twitter: "Twitter",
+    linkedin: "LinkedIn",
     viewProject: "View project",
     stars: "stars",
     noProjects: "No public projects found.",
+    noDescription: "No description available.",
     noEmail: "No public email available.",
     errorLoading: "Error loading GitHub data.",
   },
@@ -214,7 +216,6 @@ async function loadGitHubData() {
   } catch (error) {
     console.error("Error loading GitHub data:", error);
     showError();
-    hideLoading();
   }
 }
 
@@ -227,6 +228,7 @@ async function fetchInfoFromFile() {
       return {
         username: lines[0]?.trim() || null,
         email: lines[1]?.trim() || null,
+        linkedin: lines[2]?.trim() || null,
       };
     }
   } catch (error) {
@@ -237,6 +239,7 @@ async function fetchInfoFromFile() {
   return {
     username: extractUsernameFromDomain(),
     email: null,
+    linkedin: null,
   };
 }
 
@@ -281,13 +284,12 @@ async function updateUserInfo() {
   // Update basic info
   elements.userName.textContent = userData.name || userData.login;
 
-  // Use GitHub bio if available, otherwise use about text from file
+  // Show GitHub bio if available; the about text already has its own section
   if (userData.bio) {
     // For GitHub bio, preserve line breaks with <br> tags
     elements.userBio.innerHTML = userData.bio.replace(/\n/g, "<br>");
   } else {
-    const aboutText = await fetchAboutText(currentLang);
-    elements.userBio.innerHTML = `<p>${aboutText}</p>`;
+    elements.userBio.textContent = "";
   }
   elements.userAvatar.src = userData.avatar_url;
   elements.userAvatar.alt = `${userData.name || userData.login} avatar`;
@@ -313,12 +315,12 @@ async function updateUserInfo() {
     addHeroLink('<i class="fas fa-globe"></i>', translations.website, url);
   }
 
-  // Twitter link
-  if (userData.twitter_username) {
+  // LinkedIn link from info file
+  if (userInfo?.linkedin) {
     addHeroLink(
-      '<i class="fab fa-twitter"></i>',
-      translations.twitter,
-      `https://twitter.com/${userData.twitter_username}`
+      '<i class="fab fa-linkedin"></i>',
+      translations.linkedin,
+      userInfo.linkedin
     );
   }
 
@@ -362,7 +364,7 @@ function updateProjects() {
         </div>
       </div>
       <p class="project-description">
-        ${repo.description || "No description available."}
+        ${repo.description || translations.noDescription}
       </p>
       <a href="${
         repo.html_url
@@ -399,19 +401,6 @@ function updateMetaTags() {
   if (ogImage) ogImage.content = userData.avatar_url;
   if (ogUrl) ogUrl.content = window.location.href;
 
-  // Update Twitter Card tags
-  const twitterTitle = document.querySelector('meta[name="twitter:title"]');
-  const twitterDescription = document.querySelector(
-    'meta[name="twitter:description"]'
-  );
-  const twitterImage = document.querySelector('meta[name="twitter:image"]');
-
-  if (twitterTitle)
-    twitterTitle.content = `${userData.name || userData.login} - Portfolio`;
-  if (twitterDescription && userData.bio)
-    twitterDescription.content = userData.bio;
-  if (twitterImage) twitterImage.content = userData.avatar_url;
-
   // Update author meta tag
   const metaAuthor = document.querySelector('meta[name="author"]');
   if (metaAuthor) {
@@ -434,7 +423,7 @@ function showError() {
 
   // Set fallback data
   elements.userName.textContent = "Developer";
-  elements.userBio.textContent = translations.aboutText;
+  elements.userBio.textContent = "";
   elements.userAvatar.src = "https://github.com/github.png";
   elements.userAvatar.alt = "Default avatar";
 

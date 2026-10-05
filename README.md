@@ -14,10 +14,10 @@ Visita: [rmanzanas.com](https://rmanzanas.com) o [petandk.github.io](https://pet
 - 🔄 **Integración con GitHub API** - Carga automática de:
   - Avatar y nombre de usuario
   - Bio del perfil
-  - Enlaces sociales (email, website, Twitter)
+  - Enlaces sociales (email, website, LinkedIn)
   - Repositorios públicos con estrellas
 - ⚡ **Rendimiento optimizado** - Carga rápida y eficiente
-- 🎯 **SEO optimizado** - Meta tags para redes sociales (Open Graph y Twitter Cards)
+- 🎯 **SEO optimizado** - Meta tags para redes sociales (Open Graph)
 
 ## 📁 Estructura del Proyecto
 
@@ -29,7 +29,7 @@ petandk.github.io/
 ├── script.js           # Lógica JavaScript y API
 ├── favicon.svg         # Icono del sitio
 │
-├── info                # Archivo con usuario de GitHub y email
+├── info                # Archivo con usuario de GitHub, email y LinkedIn
 ├── aboutMe             # Descripción "Acerca de mí" (inglés)
 ├── sobreMi             # Descripción "Acerca de mí" (español)
 │
@@ -39,19 +39,21 @@ petandk.github.io/
 
 ## 🚀 Configuración Rápida
 
-### 1. Configurar Usuario de GitHub y Email
+### 1. Configurar Usuario de GitHub, Email y LinkedIn
 
-Edita el archivo **`info`** con tu usuario de GitHub y email (una línea por dato):
+Edita el archivo **`info`** con tu usuario de GitHub, email y URL de LinkedIn (una línea por dato):
 
 ```
 tu-usuario-github
 tu-email@ejemplo.com
+https://www.linkedin.com/in/tu-perfil
 ```
 
 **¿Para qué sirve cada línea?**
 
 - **Línea 1 (usuario)**: Se usa para conectar con la API de GitHub y obtener tu perfil, avatar, bio y repositorios
 - **Línea 2 (email)**: Email personalizado que aparecerá como enlace de contacto en tu portfolio (puede ser diferente al de GitHub)
+- **Línea 3 (LinkedIn, opcional)**: URL de tu perfil de LinkedIn; si falta, no se muestra el botón
 
 ### 2. Personalizar "Acerca de Mí"
 
@@ -148,7 +150,7 @@ Edita `index.html` en la sección `<head>`:
 
 | Archivo       | Qué modificar                                 | Descripción                                    | Obligatorio |
 | ------------- | --------------------------------------------- | ---------------------------------------------- | ----------- |
-| `info`        | Usuario de GitHub (línea 1) y email (línea 2) | Usuario para API de GitHub y email de contacto | ✅ Sí       |
+| `info`        | Usuario de GitHub (línea 1), email (línea 2) y LinkedIn (línea 3) | Usuario para API de GitHub, email y LinkedIn | ✅ Sí       |
 | `aboutMe`     | Descripción en inglés                         | Tu presentación profesional en inglés          | ✅ Sí       |
 | `sobreMi`     | Descripción en español                        | Tu presentación profesional en español         | ✅ Sí       |
 | `CNAME`       | Tu dominio personalizado                      | Dominio custom (ej: tudominio.com)             | ❌ No       |
