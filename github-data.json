@@ -11,7 +11,7 @@
   "repos": [
     {
       "name": "petandk.github.io",
-      "description": null,
+      "description": "Personal portfolio template for GitHub Pages: fork it, put your GitHub username in the info file and it builds your page from your profile and repos. Live at rmanzanas.com.",
       "html_url": "https://github.com/petandk/petandk.github.io",
       "stargazers_count": 0,
       "fork": false,
@@ -304,6 +304,44 @@
       "stargazers_count": 0,
       "fork": false,
       "private": false
+    }
+  ],
+  "pinned": [
+    {
+      "name": "42CommonCore",
+      "description": "Entry point to my 42 Common Core projects at 42 Barcelona, plus dotfiles, a C++ template and exam practice.",
+      "html_url": "https://github.com/petandk/42CommonCore",
+      "stargazers_count": 0
+    },
+    {
+      "name": "Radiopatito_42",
+      "description": "Userscript for the 42 intranet clusters page: enlarged profile pictures, cluster filters, favourites and user search.",
+      "html_url": "https://github.com/petandk/Radiopatito_42",
+      "stargazers_count": 5
+    },
+    {
+      "name": "Vibe-Coding",
+      "description": "Collection of projects and experiments built in collaboration with AI tools, from small utilities to bigger concepts.",
+      "html_url": "https://github.com/petandk/Vibe-Coding",
+      "stargazers_count": 0
+    },
+    {
+      "name": "Guinyote",
+      "description": "An attempt to create a web version of a spaniard card game called \"guiñote\".",
+      "html_url": "https://github.com/petandk/Guinyote",
+      "stargazers_count": 1
+    },
+    {
+      "name": "ft_transcendence",
+      "description": "A real-time multiplayer Pong platform with tournaments, chat, OAuth, stats and i18n, built with Next.js, NestJS, PostgreSQL and Docker.",
+      "html_url": "https://github.com/petandk/ft_transcendence",
+      "stargazers_count": 0
+    },
+    {
+      "name": "webserv",
+      "description": "An HTTP/1.1 server with an Nginx-inspired configuration file, static files, uploads and CGI.",
+      "html_url": "https://github.com/petandk/webserv",
+      "stargazers_count": 0
     }
   ]
 }
