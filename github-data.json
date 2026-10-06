@@ -10,6 +10,14 @@
   },
   "repos": [
     {
+      "name": "petandk.github.io",
+      "description": null,
+      "html_url": "https://github.com/petandk/petandk.github.io",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
       "name": "petandk",
       "description": "Profile README",
       "html_url": "https://github.com/petandk/petandk",
@@ -221,14 +229,6 @@
       "name": "minishell",
       "description": null,
       "html_url": "https://github.com/petandk/minishell",
-      "stargazers_count": 0,
-      "fork": false,
-      "private": false
-    },
-    {
-      "name": "petandk.github.io",
-      "description": null,
-      "html_url": "https://github.com/petandk/petandk.github.io",
       "stargazers_count": 0,
       "fork": false,
       "private": false
