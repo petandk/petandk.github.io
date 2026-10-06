@@ -1,0 +1,309 @@
+{
+  "user": {
+    "login": "petandk",
+    "name": "Raúl Manzanas Trillo",
+    "bio": "\"Outer Corer\" en 42 Barcelona",
+    "blog": "rmanzanas.com",
+    "email": "raul@rmanzanas.com",
+    "avatar_url": "https://avatars.githubusercontent.com/u/8835652?v=4",
+    "html_url": "https://github.com/petandk"
+  },
+  "repos": [
+    {
+      "name": "petandk",
+      "description": "Profile README",
+      "html_url": "https://github.com/petandk/petandk",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "Vibe-Coding",
+      "description": "Collection of projects and experiments built in collaboration with AI tools, from small utilities to bigger concepts.",
+      "html_url": "https://github.com/petandk/Vibe-Coding",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "Radiopatito_42",
+      "description": "Userscript for the 42 intranet clusters page: enlarged profile pictures, cluster filters, favourites and user search.",
+      "html_url": "https://github.com/petandk/Radiopatito_42",
+      "stargazers_count": 5,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "webserv",
+      "description": "An HTTP/1.1 server with an Nginx-inspired configuration file, static files, uploads and CGI.",
+      "html_url": "https://github.com/petandk/webserv",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "push_swap",
+      "description": "Sorting numbers with two stacks and as few operations as possible, using a cost-based greedy algorithm.",
+      "html_url": "https://github.com/petandk/push_swap",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "pipex",
+      "description": "Reproducing the shell pipe < infile cmd1 | cmd2 > outfile with fork, pipe, dup2 and execve.",
+      "html_url": "https://github.com/petandk/pipex",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "philosophers",
+      "description": "The dining philosophers problem, solved with threads and mutexes without deadlocks or data races.",
+      "html_url": "https://github.com/petandk/philosophers",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "inception",
+      "description": "A WordPress + MariaDB + NGINX infrastructure, each service in its own container built from scratch with Docker Compose.",
+      "html_url": "https://github.com/petandk/inception",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "get_next_line",
+      "description": "Reading a file descriptor one line at a time, with static variables and any buffer size.",
+      "html_url": "https://github.com/petandk/get_next_line",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "ft_transcendence",
+      "description": "A real-time multiplayer Pong platform with tournaments, chat, OAuth, stats and i18n, built with Next.js, NestJS, PostgreSQL and Docker.",
+      "html_url": "https://github.com/petandk/ft_transcendence",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "ft_printf",
+      "description": "A re-implementation of printf() with variadic functions.",
+      "html_url": "https://github.com/petandk/ft_printf",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "fract-ol",
+      "description": "An interactive explorer of the Mandelbrot and Julia fractals, with zoom and navigation.",
+      "html_url": "https://github.com/petandk/fract-ol",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "cub3d",
+      "description": "A Wolfenstein 3D-style raycaster with textured walls, minimap, collisions and mouse control.",
+      "html_url": "https://github.com/petandk/cub3d",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "cpp09-btc-rpn-pmergeme",
+      "description": "A bitcoin price calculator, an RPN evaluator, and the Ford-Johnson merge-insertion sort.",
+      "html_url": "https://github.com/petandk/cpp09-btc-rpn-pmergeme",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "cpp08-containers-iterators",
+      "description": "STL containers, iterators and algorithms, and an iterable std::stack.",
+      "html_url": "https://github.com/petandk/cpp08-containers-iterators",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "cpp07-templates",
+      "description": "Function templates and a generic Array<T> class template.",
+      "html_url": "https://github.com/petandk/cpp07-templates",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "cpp06-casts",
+      "description": "The four C++ casts: scalar conversion, serialization and runtime type identification.",
+      "html_url": "https://github.com/petandk/cpp06-casts",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "cpp05-exceptions",
+      "description": "Exceptions and custom exception classes, through a simulated bureaucracy.",
+      "html_url": "https://github.com/petandk/cpp05-exceptions",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "cpp04-polymorphism-abstract-classes",
+      "description": "Virtual functions, deep copies, abstract classes and interfaces.",
+      "html_url": "https://github.com/petandk/cpp04-polymorphism-abstract-classes",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "cpp03-inheritance",
+      "description": "Inheritance, and the diamond problem solved with virtual inheritance.",
+      "html_url": "https://github.com/petandk/cpp03-inheritance",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "cpp02-operator-overloading",
+      "description": "Operator overloading and the Orthodox Canonical Form, with a fixed-point number class.",
+      "html_url": "https://github.com/petandk/cpp02-operator-overloading",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "cpp01-memory-references",
+      "description": "Memory allocation, references and pointers to member functions.",
+      "html_url": "https://github.com/petandk/cpp01-memory-references",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "cpp00-namespaces-classes",
+      "description": "Classes, member functions, streams, static and const.",
+      "html_url": "https://github.com/petandk/cpp00-namespaces-classes",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "born2beroot",
+      "description": "A secure Debian server in a virtual machine: encrypted LVM, SSH, UFW, password policy, strict sudo and a monitoring script.",
+      "html_url": "https://github.com/petandk/born2beroot",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "42CommonCore",
+      "description": "Entry point to my 42 Common Core projects at 42 Barcelona, plus dotfiles, a C++ template and exam practice.",
+      "html_url": "https://github.com/petandk/42CommonCore",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "libft",
+      "description": "My own C library: re-implementations of libc functions, string utilities and linked lists, reused in later projects.",
+      "html_url": "https://github.com/petandk/libft",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "minishell",
+      "description": null,
+      "html_url": "https://github.com/petandk/minishell",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "petandk.github.io",
+      "description": null,
+      "html_url": "https://github.com/petandk/petandk.github.io",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "tst",
+      "description": "tst",
+      "html_url": "https://github.com/petandk/tst",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "Road-to-NextWind",
+      "description": "Just some random projects to practice/learn Next.js + taildiwnd",
+      "html_url": "https://github.com/petandk/Road-to-NextWind",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "webserv-mio",
+      "description": null,
+      "html_url": "https://github.com/petandk/webserv-mio",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "Taller-de-CI-CD-en-C-by-gemartin_My-solution-in-progress",
+      "description": null,
+      "html_url": "https://github.com/petandk/Taller-de-CI-CD-en-C-by-gemartin_My-solution-in-progress",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "Guinyote",
+      "description": "An attempt to create a web version of a spaniard card game called \"guiñote\".",
+      "html_url": "https://github.com/petandk/Guinyote",
+      "stargazers_count": 1,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "42mainFiles",
+      "description": "my own main files to check students apps",
+      "html_url": "https://github.com/petandk/42mainFiles",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "app_centro_estudios",
+      "description": null,
+      "html_url": "https://github.com/petandk/app_centro_estudios",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "primeros-pasos-node-express",
+      "description": null,
+      "html_url": "https://github.com/petandk/primeros-pasos-node-express",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "HelloWorld-Node_Express",
+      "description": null,
+      "html_url": "https://github.com/petandk/HelloWorld-Node_Express",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    }
+  ]
+}

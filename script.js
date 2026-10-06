@@ -217,7 +217,23 @@ async function loadGitHubData() {
 // Cache GitHub responses to stay under the API rate limit (60 requests/hour per IP)
 const CACHE_TTL = 60 * 60 * 1000; // 1 hour
 
+// Daily snapshot written by .github/workflows/update-github-data.yml
+async function fetchGitHubSnapshot() {
+  const response = await fetch("github-data.json");
+  if (!response.ok) throw new Error("No GitHub data snapshot");
+  const { user, repos } = await response.json();
+  return { user, allRepos: repos };
+}
+
 async function fetchGitHubData(username) {
+  try {
+    const { user, allRepos } = await fetchGitHubSnapshot();
+    return { userData: user, reposData: selectTopRepos(allRepos) };
+  } catch (error) {
+    // No snapshot (e.g. local development): ask the API directly
+    console.warn("Falling back to the GitHub API:", error);
+  }
+
   const [userResponse, reposResponse] = await Promise.all([
     fetch(`https://api.github.com/users/${username}`),
     fetch(
@@ -232,13 +248,15 @@ async function fetchGitHubData(username) {
   const user = await userResponse.json();
   const allRepos = await reposResponse.json();
 
-  // Filter and sort repositories by stars
-  const repos = allRepos
+  return { userData: user, reposData: selectTopRepos(allRepos) };
+}
+
+// Filter and sort repositories by stars
+function selectTopRepos(allRepos) {
+  return allRepos
     .filter((repo) => !repo.private && !repo.fork)
     .sort((a, b) => b.stargazers_count - a.stargazers_count)
     .slice(0, 6); // Show top 6 repositories
-
-  return { userData: user, reposData: repos };
 }
 
 function readGitHubCache(username) {

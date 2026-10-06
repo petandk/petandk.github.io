@@ -1,0 +1,50 @@
+name: Update GitHub data
+
+# Snapshot the profile and repos into github-data.json so visitors never hit
+# the GitHub API (60 requests/hour per IP when unauthenticated).
+on:
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [info]
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch profile and repositories
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          username=$(head -n 1 info | tr -d '[:space:]')
+          gh api "users/$username" > user.json
+          gh api "users/$username/repos?sort=updated&per_page=100" > repos.json
+          jq -n --slurpfile user user.json --slurpfile repos repos.json '{
+            user: ($user[0] | {login, name, bio, blog, email, avatar_url, html_url}),
+            repos: [$repos[0][] | {name, description, html_url, stargazers_count, fork, private}]
+          }' > github-data.json
+          rm user.json repos.json
+
+      - name: Commit and redeploy if changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git add github-data.json
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: update GitHub data snapshot"
+          git push
+          # Pushes made with GITHUB_TOKEN don't trigger a Pages build on their own
+          gh api -X POST "repos/$GITHUB_REPOSITORY/pages/builds"

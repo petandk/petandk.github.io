@@ -179,14 +179,13 @@ Edita `index.html` en la sección `<head>`:
 
 ## ⏱️ Límite de la API de GitHub
 
-La API de GitHub sin autenticación permite **60 peticiones por hora por IP**, y cada carga de la página usa 2. Para no agotarlo, los datos del perfil y los repositorios se guardan en `localStorage` durante **1 hora**:
+La API de GitHub sin autenticación permite **60 peticiones por hora por IP**. En redes compartidas (por ejemplo, un campus donde todos salen por la misma IP) ese límite se agota fácilmente, así que **la web no llama a la API desde el navegador**:
 
-- Durante esa hora, recargar la página (incluso con Ctrl+F5) no hace peticiones a GitHub.
-- Los cambios en GitHub (bio, repositorios nuevos) pueden tardar hasta 1 hora en aparecer.
-- Si GitHub rechaza la petición, se muestran los últimos datos guardados.
-- Para forzar datos nuevos, borra la clave `github-cache-<usuario>` en DevTools → Application → Local Storage.
-
-Si aparece "Error al cargar los datos de GitHub", probablemente tu IP ha agotado el límite (puedes comprobarlo en `https://api.github.com/rate_limit`). Se restablece en menos de una hora.
+- El workflow `.github/workflows/update-github-data.yml` descarga el perfil y los repositorios **una vez al día** (y cada vez que cambia `info`) y los guarda en `github-data.json`.
+- La web lee ese fichero de su propio dominio, así que no depende del límite de la API.
+- Los cambios en GitHub (bio, repositorios nuevos) pueden tardar hasta 1 día en aparecer. Para actualizarlos al momento: pestaña **Actions** → **Update GitHub data** → **Run workflow**.
+- Si `github-data.json` no existe (por ejemplo, al probar la web en local), se usa la API directamente como antes.
+- Además, los datos se guardan en `localStorage` durante **1 hora**; para forzar datos nuevos, borra la clave `github-cache-<usuario>` en DevTools → Application → Local Storage.
 
 ## ⚠️ Nota Importante sobre Privacidad
 
