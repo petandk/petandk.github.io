@@ -15,7 +15,7 @@ Visita: [rmanzanas.com](https://rmanzanas.com) o [petandk.github.io](https://pet
   - Avatar y nombre de usuario
   - Bio del perfil
   - Enlaces sociales (email, website, LinkedIn)
-  - Repositorios públicos con estrellas
+  - Tus **repositorios fijados** (pinned) en el perfil de GitHub, en el mismo orden; si no tienes ninguno fijado, los 6 repositorios públicos con más estrellas. Para cambiar los proyectos que aparecen, cambia los fijados en tu perfil (**Customize your pins**): la web se actualiza en la siguiente ejecución del workflow
 - 🛡️ **Sin límites de la API** - Un workflow de GitHub Actions guarda tus datos de GitHub una vez al día en `github-data.json`, así que la web carga siempre, aunque el visitante esté en una red compartida (ver [Límite de la API de GitHub](#️-límite-de-la-api-de-github))
 - ⚡ **Rendimiento optimizado** - Los datos de GitHub se guardan además en caché local durante 1 hora
 - 🎯 **SEO optimizado** - Meta tags para redes sociales (Open Graph)

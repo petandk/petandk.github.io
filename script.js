@@ -221,18 +221,20 @@ const CACHE_TTL = 60 * 60 * 1000; // 1 hour
 async function fetchGitHubSnapshot(username) {
   const response = await fetch("github-data.json");
   if (!response.ok) throw new Error("No GitHub data snapshot");
-  const { user, repos } = await response.json();
+  const { user, repos, pinned } = await response.json();
   // A fork keeps the original owner's snapshot until its workflow runs
   if (user.login.toLowerCase() !== username.toLowerCase()) {
     throw new Error(`Snapshot belongs to ${user.login}, not ${username}`);
   }
-  return { user, allRepos: repos };
+  return { user, allRepos: repos, pinned: pinned || [] };
 }
 
 async function fetchGitHubData(username) {
   try {
-    const { user, allRepos } = await fetchGitHubSnapshot(username);
-    return { userData: user, reposData: selectTopRepos(allRepos) };
+    const { user, allRepos, pinned } = await fetchGitHubSnapshot(username);
+    // Show the repositories pinned on the GitHub profile, if any
+    const reposData = pinned.length > 0 ? pinned : selectTopRepos(allRepos);
+    return { userData: user, reposData };
   } catch (error) {
     // No snapshot (e.g. local development): ask the API directly
     console.warn("Falling back to the GitHub API:", error);

@@ -27,11 +27,22 @@ jobs:
           username=$(head -n 1 info | tr -d '[:space:]')
           gh api "users/$username" > user.json
           gh api "users/$username/repos?sort=updated&per_page=100" > repos.json
-          jq -n --slurpfile user user.json --slurpfile repos repos.json '{
+          # Pinned repositories are only exposed through the GraphQL API
+          gh api graphql -F login="$username" -f query='
+            query($login: String!) {
+              user(login: $login) {
+                pinnedItems(first: 6, types: REPOSITORY) {
+                  nodes { ... on Repository { name description url stargazerCount } }
+                }
+              }
+            }' > pinned.json
+          jq -n --slurpfile user user.json --slurpfile repos repos.json --slurpfile pinned pinned.json '{
             user: ($user[0] | {login, name, bio, blog, email, avatar_url, html_url}),
-            repos: [$repos[0][] | {name, description, html_url, stargazers_count, fork, private}]
+            repos: [$repos[0][] | {name, description, html_url, stargazers_count, fork, private}],
+            pinned: [$pinned[0].data.user.pinnedItems.nodes[]
+              | {name, description, html_url: .url, stargazers_count: .stargazerCount}]
           }' > github-data.json
-          rm user.json repos.json
+          rm user.json repos.json pinned.json
 
       - name: Commit and redeploy if changed
         env:
