@@ -1,6 +1,6 @@
 # Portfolio Personal - GitHub Pages
 
-Un portfolio personal moderno y responsive que se conecta automáticamente con la API de GitHub para mostrar tu información de perfil y repositorios públicos.
+Un portfolio personal moderno y responsive que muestra automáticamente tu información de perfil y repositorios públicos de GitHub. Es una plantilla: haz fork, pon tu usuario en `info` y listo.
 
 ## 🌐 Demo
 
@@ -16,7 +16,8 @@ Visita: [rmanzanas.com](https://rmanzanas.com) o [petandk.github.io](https://pet
   - Bio del perfil
   - Enlaces sociales (email, website, LinkedIn)
   - Repositorios públicos con estrellas
-- ⚡ **Rendimiento optimizado** - Los datos de GitHub se guardan en caché local durante 1 hora
+- 🛡️ **Sin límites de la API** - Un workflow de GitHub Actions guarda tus datos de GitHub una vez al día en `github-data.json`, así que la web carga siempre, aunque el visitante esté en una red compartida (ver [Límite de la API de GitHub](#️-límite-de-la-api-de-github))
+- ⚡ **Rendimiento optimizado** - Los datos de GitHub se guardan además en caché local durante 1 hora
 - 🎯 **SEO optimizado** - Meta tags para redes sociales (Open Graph)
 
 ## 📁 Estructura del Proyecto
@@ -32,6 +33,10 @@ petandk.github.io/
 ├── info                # Archivo con usuario de GitHub, email y LinkedIn
 ├── aboutMe             # Descripción "Acerca de mí" (inglés)
 ├── sobreMi             # Descripción "Acerca de mí" (español)
+│
+├── github-data.json    # Copia diaria de tu perfil y repositorios (generada automáticamente)
+├── .github/workflows/
+│   └── update-github-data.yml  # Workflow que genera github-data.json
 │
 ├── CNAME               # Configuración de dominio personalizado
 └── README.md           # Este archivo
@@ -55,7 +60,16 @@ https://www.linkedin.com/in/tu-perfil
 - **Línea 2 (email)**: Email personalizado que aparecerá como enlace de contacto en tu portfolio (puede ser diferente al de GitHub)
 - **Línea 3 (LinkedIn, opcional)**: URL de tu perfil de LinkedIn; si falta, no se muestra el botón
 
-### 2. Personalizar "Acerca de Mí"
+### 2. Activar la actualización diaria de tus datos
+
+El repositorio incluye un `github-data.json` con los datos del autor original. Para generar el tuyo:
+
+1. Ve a la pestaña **Actions** de tu repositorio. Si es un fork, pulsa **"I understand my workflows, go ahead and enable them"** (GitHub desactiva los workflows en los forks por defecto).
+2. Elige **Update GitHub data** → **Run workflow**.
+
+A partir de ahí se actualiza solo cada día y cada vez que modifiques `info`. Mientras tanto la web no mostrará datos ajenos: si el `github-data.json` no es tuyo, usa la API de GitHub directamente.
+
+### 3. Personalizar "Acerca de Mí"
 
 #### Archivo `aboutMe` (inglés):
 
@@ -83,7 +97,7 @@ Me interesa especialmente la automatización, la organización modular del códi
 el diseño de sistemas que sean claros, sostenibles y fáciles de mantener.
 ```
 
-### 3. Configurar Dominio Personalizado (Opcional)
+### 4. Configurar Dominio Personalizado (Opcional)
 
 Si tienes un dominio personalizado, edita el archivo **`CNAME`** con tu dominio:
 
