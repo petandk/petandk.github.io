@@ -10,6 +10,14 @@
   },
   "repos": [
     {
+      "name": "Vibe-Coding",
+      "description": "Collection of projects and experiments built in collaboration with AI tools, from small utilities to bigger concepts.",
+      "html_url": "https://github.com/petandk/Vibe-Coding",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
       "name": "petandk.github.io",
       "description": "Personal portfolio template for GitHub Pages: fork it, put your GitHub username in the info file and it builds your page from your profile and repos. Live at rmanzanas.com.",
       "html_url": "https://github.com/petandk/petandk.github.io",
@@ -29,14 +37,6 @@
       "name": "petandk",
       "description": "Profile README",
       "html_url": "https://github.com/petandk/petandk",
-      "stargazers_count": 0,
-      "fork": false,
-      "private": false
-    },
-    {
-      "name": "Vibe-Coding",
-      "description": "Collection of projects and experiments built in collaboration with AI tools, from small utilities to bigger concepts.",
-      "html_url": "https://github.com/petandk/Vibe-Coding",
       "stargazers_count": 0,
       "fork": false,
       "private": false
