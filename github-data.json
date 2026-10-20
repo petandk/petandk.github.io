@@ -10,6 +10,14 @@
   },
   "repos": [
     {
+      "name": "cub3d",
+      "description": "A Wolfenstein 3D-style raycaster with textured walls, minimap, collisions and mouse control.",
+      "html_url": "https://github.com/petandk/cub3d",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
       "name": "Vibe-Coding",
       "description": "Collection of projects and experiments built in collaboration with AI tools, from small utilities to bigger concepts.",
       "html_url": "https://github.com/petandk/Vibe-Coding",
@@ -109,14 +117,6 @@
       "name": "fract-ol",
       "description": "An interactive explorer of the Mandelbrot and Julia fractals, with zoom and navigation.",
       "html_url": "https://github.com/petandk/fract-ol",
-      "stargazers_count": 0,
-      "fork": false,
-      "private": false
-    },
-    {
-      "name": "cub3d",
-      "description": "A Wolfenstein 3D-style raycaster with textured walls, minimap, collisions and mouse control.",
-      "html_url": "https://github.com/petandk/cub3d",
       "stargazers_count": 0,
       "fork": false,
       "private": false
