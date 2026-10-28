@@ -10,6 +10,14 @@
   },
   "repos": [
     {
+      "name": "Guinyote",
+      "description": "An attempt to create a web version of a spaniard card game called \"guiñote\".",
+      "html_url": "https://github.com/petandk/Guinyote",
+      "stargazers_count": 1,
+      "fork": false,
+      "private": false
+    },
+    {
       "name": "petandk.github.io",
       "description": "Personal portfolio template for GitHub Pages: fork it, put your GitHub username in the info file and it builds your page from your profile and repos. Live at rmanzanas.com.",
       "html_url": "https://github.com/petandk/petandk.github.io",
@@ -262,14 +270,6 @@
       "description": null,
       "html_url": "https://github.com/petandk/Taller-de-CI-CD-en-C-by-gemartin_My-solution-in-progress",
       "stargazers_count": 0,
-      "fork": false,
-      "private": false
-    },
-    {
-      "name": "Guinyote",
-      "description": "An attempt to create a web version of a spaniard card game called \"guiñote\".",
-      "html_url": "https://github.com/petandk/Guinyote",
-      "stargazers_count": 1,
       "fork": false,
       "private": false
     },
