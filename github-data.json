@@ -10,17 +10,25 @@
   },
   "repos": [
     {
-      "name": "petandk.github.io",
-      "description": "Personal portfolio template for GitHub Pages: fork it, put your GitHub username in the info file and it builds your page from your profile and repos. Live at rmanzanas.com.",
-      "html_url": "https://github.com/petandk/petandk.github.io",
+      "name": "petandk",
+      "description": "Profile README",
+      "html_url": "https://github.com/petandk/petandk",
       "stargazers_count": 0,
       "fork": false,
       "private": false
     },
     {
-      "name": "petandk",
-      "description": "Profile README",
-      "html_url": "https://github.com/petandk/petandk",
+      "name": "42CommonCore",
+      "description": "Entry point to my 42 Common Core projects at 42 Barcelona, plus dotfiles, a C++ template and exam practice.",
+      "html_url": "https://github.com/petandk/42CommonCore",
+      "stargazers_count": 0,
+      "fork": false,
+      "private": false
+    },
+    {
+      "name": "petandk.github.io",
+      "description": "Personal portfolio template for GitHub Pages: fork it, put your GitHub username in the info file and it builds your page from your profile and repos. Live at rmanzanas.com.",
+      "html_url": "https://github.com/petandk/petandk.github.io",
       "stargazers_count": 0,
       "fork": false,
       "private": false
@@ -213,14 +221,6 @@
       "name": "born2beroot",
       "description": "A secure Debian server in a virtual machine: encrypted LVM, SSH, UFW, password policy, strict sudo and a monitoring script.",
       "html_url": "https://github.com/petandk/born2beroot",
-      "stargazers_count": 0,
-      "fork": false,
-      "private": false
-    },
-    {
-      "name": "42CommonCore",
-      "description": "Entry point to my 42 Common Core projects at 42 Barcelona, plus dotfiles, a C++ template and exam practice.",
-      "html_url": "https://github.com/petandk/42CommonCore",
       "stargazers_count": 0,
       "fork": false,
       "private": false
